@@ -1,3 +1,4 @@
+#貌似下载有点小问题，懒得改了哈哈哈
 # coding=utf-8
 import pandas as pd
 import time
@@ -68,7 +69,7 @@ def click_and_scrape(driver, url):
         return None, None
 
 def main():
-    input_file = 'links.xlsx'
+    input_file = 'mtslash_favorites_selenium.xlsx'
 
     try:
         links = scrape_links_from_excel(input_file)
