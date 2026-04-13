@@ -88,6 +88,17 @@ def clean_filename(title):
     return title
 
 # =======================
+# 链接转换函数（提取tid并生成打印链接）
+# =======================
+def convert_thread_url(original_url):
+    match = re.search(r'thread-(\d+)-', original_url)
+    if match:
+        tid = match.group(1)
+        new_url = f"https://www.mtslash.life/forum.php?mod=viewthread&action=printable&tid={tid}"
+        return new_url
+    return original_url
+
+# =======================
 # 6. 保存 PDF（用帖子标题命名）
 # =======================
 def save_links_as_pdf(driver, links, save_dir="pdfs"):
@@ -96,7 +107,9 @@ def save_links_as_pdf(driver, links, save_dir="pdfs"):
 
     for idx, link in enumerate(links, start=1):
         try:
-            driver.get(link)
+            # 转换为打印版链接
+            new_link = convert_thread_url(link)
+            driver.get(new_link)
             time.sleep(3)  # 等页面加载
 
             # 获取帖子标题
